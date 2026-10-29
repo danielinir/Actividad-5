@@ -1,0 +1,41 @@
+MODA URBANA · PROYECTO DE TRANSFORMACIÓN DIGITAL
+
+PRESENTACIÓN
+Presentacion_Moda_Urbana.pptx: 12 diapositivas editables con notas para exponer.
+Para llevarla a Canva: entra en tu cuenta e importa este archivo PowerPoint.
+Comprueba el aspecto tras la importación, ya que pueden variar fuentes o posiciones.
+Presentacion_Moda_Urbana.pdf: copia para consultar y presentar sin modificar.
+La presentación no está alojada en Canva ni conectada a una cuenta.
+
+PÁGINA WEB
+Abre Moda_Urbana.html con doble clic y elige tu navegador.
+Funciona sin instalar nada y sin conexión a internet. Los enlaces a fuentes sí requieren internet.
+No está publicada ni dispone de una dirección web pública.
+
+PRUEBA PARA MOSTRAR EN CLASE
+1. Abre «Antes y después» y explica los problemas iniciales de la tienda.
+2. Ve a «Gestión de prueba» y anota las unidades de Camiseta Essential, talla S, color Crudo.
+3. Vuelve a «La tienda», baja a la colección y añade esa camiseta a la cesta.
+4. Abre la cesta y pulsa «Confirmar pedido de prueba».
+5. Pulsa «Ver pedido e inventario»: aparece MU-001 y hay una unidad menos de esa talla y color.
+6. Pulsa «Marcar como preparado» para enseñar el seguimiento del pedido.
+7. «Reiniciar demostración» devuelve las existencias iniciales y borra los pedidos de prueba.
+
+QUÉ SE PUEDE ENSEÑAR
+Catálogo de seis productos ilustrados, búsqueda, filtros, tallas y colores, disponibilidad,
+cesta con cantidades, pedido de prueba, inventario y estado de preparación.
+Puedes probar un agotado: Camiseta Essential, talla L, color Negro.
+
+ALCANCE
+Tienda, prendas, precios y existencias ficticios para un trabajo de clase.
+No se cobra, no se envía mercancía ni se solicitan datos personales o bancarios.
+Los cambios se guardan en este navegador si permite el almacenamiento local.
+No hay sincronización con Odoo, otros dispositivos o una empresa real.
+El calendario, las redes sociales y la conexión con la tienda física son propuestas del informe.
+Los beneficios de la transformación son esperados, no resultados reales medidos.
+
+VERIFICACIÓN
+Presentación: integridad y límites de elementos comprobados; PDF revisado visualmente.
+Web: lógica de compra e inventario comprobada con pruebas automáticas y DOM simulado.
+La apertura automatizada del HTML local fue bloqueada por la política del navegador.
+Por ello, queda pendiente la revisión visual y de interacción en un navegador real.

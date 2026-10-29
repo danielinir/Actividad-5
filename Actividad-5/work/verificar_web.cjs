@@ -1,0 +1,57 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync('outputs/Moda_Urbana.html','utf8');
+const source=html.match(/<script>([\s\S]*?)<\/script>/)[1];
+const nodes=new Map();
+class Element{
+ constructor(id=''){this.id=id;this.value=id.startsWith('size-')?(id==='size-straight'?'36':id==='size-everyday'?'Única':'S'):id.startsWith('color-')?({essential:'Crudo',city:'Terracota',straight:'Azul',studio:'Arena',linen:'Blanco',everyday:'Natural'}[id.slice(6)]):'';this.innerHTML='';this.textContent='';this.children=[];this.classList={toggle(){}};this.events={};this.style={};this.dataset={};}
+ addEventListener(t,cb){this.events[t]=cb}insertAdjacentHTML(_,s){this.innerHTML+=s}setAttribute(){}removeAttribute(){}append(n){this.children.push(n)}replaceChildren(){this.children=[]}showModal(){this.open=true}close(){this.open=false}scrollIntoView(){}
+}
+const document={getElementById(id){if(!nodes.has(id))nodes.set(id,new Element(id));return nodes.get(id)},querySelectorAll(){return []},createElement(){return new Element()}};
+let stored=null;
+const c=vm.createContext({document,window:{scrollTo(){}},localStorage:{getItem(){return stored},setItem(k,v){stored=v}},setTimeout(){return 1},clearTimeout(){},confirm(){return true},console});
+vm.runInContext(source,c);
+const run=s=>vm.runInContext(s,c);
+assert.equal(run('PRODUCTS.length'),6);
+assert.equal(run('Object.keys(state.stock).length'),32);
+assert.equal(document.getElementById('result-count').textContent,'6 prendas');
+assert.equal(run("state.stock[key('essential','L','Negro')]"),0);
+assert.throws(()=>run("reserve(state.stock,[{id:'essential',size:'L',color:'Negro',qty:1}])"),/suficientes/);
+assert.throws(()=>run("reserve(state.stock,[{id:'essential',size:'S',color:'Crudo',qty:-1}])"));
+const initial=run("state.stock[key('essential','S','Crudo')]");
+assert.throws(()=>run("reserve(state.stock,[{id:'essential',size:'S',color:'Crudo',qty:1},{id:'essential',size:'L',color:'Negro',qty:1}])"));
+assert.equal(run("state.stock[key('essential','S','Crudo')]"),initial);
+document.getElementById('add-essential').events.click();
+assert.equal(run('cart.length'),1);
+assert.equal(run('total()'),1990);
+assert.equal(document.getElementById('cart-count').textContent,1);
+document.getElementById('checkout').onclick();
+assert.equal(run('cart.length'),0);
+assert.equal(run('state.orders.length'),1);
+assert.equal(run('state.orders[0].id'),'MU-001');
+assert.equal(run('state.orders[0].total'),1990);
+assert.equal(run("state.stock[key('essential','S','Crudo')]"),initial-1);
+assert.equal(document.getElementById('order-result').hidden,false);
+assert.equal(JSON.parse(stored).orders.length,1);
+assert.equal(document.getElementById('orders').children[0].children[0].textContent,'MU-001 · Pendiente · 19,90 €');
+document.getElementById('orders').children[0].children[2].onclick();
+assert.equal(run('state.orders[0].status'),'Preparado');
+document.getElementById('checkout').onclick();
+assert.equal(run('state.orders.length'),1,'Cesta vacía no crea pedidos');
+run("filter='Pantalones';renderProducts()");
+assert.equal(document.getElementById('result-count').textContent,'1 prendas');
+assert(document.getElementById('products').innerHTML.includes('Vaquero Straight'));
+run("search='noexiste';renderProducts()");
+assert(document.getElementById('products').innerHTML.includes('No encontramos'));
+run("filter='Todo';search='';renderProducts()");
+document.getElementById('size-essential').value='L';document.getElementById('color-essential').value='Negro';
+document.getElementById('size-essential').events.change();
+assert.equal(document.getElementById('add-essential').disabled,true);
+assert.equal(run("validatedState({version:1,stock:{},orders:[]}).orders.length"),0);
+document.getElementById('reset').onclick();
+assert.equal(run('state.orders.length'),0);
+assert.equal(run("state.stock[key('essential','S','Crudo')]"),initial);
+assert.equal(run('state.stock["essential|L|Negro"]'),0);
+assert.equal((html.match(/id="page-/g)||[]).length,3);
+assert(!/<script[^>]+src=|<link[^>]+href=/i.test(html),'Web sin dependencias externas');
+console.log('OK: 6 productos, 32 variantes, filtros, búsqueda, agotados, cesta, total, pedido, stock atómico, registro, preparación, guardado y reinicio.');
+console.log('Pruebas de lógica con DOM simulado. Revisión visual en navegador no realizada.');
