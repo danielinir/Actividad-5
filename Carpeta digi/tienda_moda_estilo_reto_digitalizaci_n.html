@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moda & Estilo | Tienda Online & Reto de Digitalización</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: {
+                            400: '#D4AF37',
+                            500: '#C5A028',
+                            600: '#B08C1E',
+                        },
+                        brand: {
+                            dark: '#121212',
+                            card: '#1E1E1E',
+                            cream: '#FAF7F2',
+                            accent: '#D4AF37'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos personalizados y scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c5a028;
+            border-radius: 4px;
+        }
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+        .toast-enter {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        .toast-show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased selection:bg-amber-200 selection:text-amber-900">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-neutral-900 text-stone-300 text-xs py-2 px-4 text-center tracking-wider uppercase font-medium flex justify-between items-center px-6 md:px-12">
+        <span class="hidden sm:inline"><i class="fa-solid fa-truck-fast text-gold-400 mr-2"></i> Envío gratuito en pedidos superiores a 60€</span>
+        <span class="mx-auto sm:mx-0"><i class="fa-solid fa-rocket text-gold-400 mr-1"></i> ¡Transformación Digital en Acción! Tu tienda tradicional, ahora 24/7 online</span>
+        <span class="hidden md:inline"><i class="fa-solid fa-headset text-gold-400 mr-1"></i> Soporte Clientes: 900 123 456</span>
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="lg:hidden text-stone-700 hover:text-amber-600 focus:outline-none p-2">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-neutral-900 text-gold-400 flex items-center justify-center font-bold text-xl shadow-md group-hover:bg-gold-400 group-hover:text-black transition-all">
+                    M&E
+                </div>
+                <div>
+                    <span class="text-xl md:text-2xl font-extrabold tracking-tight text-neutral-900 block leading-none">MODA & ESTILO</span>
+                    <span class="text-[10px] tracking-widest uppercase text-amber-600 font-semibold block mt-0.5">Atelier & E-Commerce</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center space-x-8 text-sm font-semibold tracking-wide text-stone-700">
+                <a href="#inicio" class="hover:text-amber-600 transition-colors py-1 border-b-2 border-transparent hover:border-amber-600">INICIO</a>
+                <a href="#catalogo" class="hover:text-amber-600 transition-colors py-1 border-b-2 border-transparent hover:border-amber-600">COLECCIÓN</a>
+                <a href="#reto-digital" class="hover:text-amber-600 transition-colors py-1 border-b-2 border-transparent hover:border-amber-600 flex items-center gap-1.5 text-amber-700">
+                    <i class="fa-solid fa-chart-line text-xs"></i> NUESTRO RETO DIGITAL
+                </a>
+                <a href="#nosotros" class="hover:text-amber-600 transition-colors py-1 border-b-2 border-transparent hover:border-amber-600">NOSOTROS</a>
+                <a href="#contacto" class="hover:text-amber-600 transition-colors py-1 border-b-2 border-transparent hover:border-amber-600">CONTACTO</a>
+            </nav>
+
+            <!-- Header Right Actions -->
+            <div class="flex items-center space-x-3 sm:space-x-5">
+                <!-- Search Input Bar -->
+                <div class="relative hidden sm:block w-48 lg:w-64">
+                    <input type="text" id="searchInput" placeholder="Buscar prenda..." 
+                        class="w-full bg-stone-100 text-stone-800 text-xs rounded-full pl-9 pr-4 py-2 border border-transparent focus:border-amber-500 focus:bg-white focus:outline-none transition-all">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-stone-400 text-xs"></i>
+                </div>
+
+                <!-- Wishlist Icon (Visual mock) -->
+                <button class="text-stone-700 hover:text-amber-600 p-2 relative hidden sm:block" title="Lista de Deseos">
+                    <i class="fa-regular fa-heart text-lg"></i>
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-amber-500 rounded-full"></span>
+                </button>
+
+                <!-- Cart Button -->
+                <button id="openCartBtn" class="bg-neutral-900 text-white hover:bg-amber-600 transition-colors px-4 py-2.5 rounded-full flex items-center gap-2.5 shadow-md relative group">
+                    <i class="fa-solid fa-bag-shopping text-gold-400 group-hover:text-white transition-colors"></i>
+                    <span class="text-xs font-bold tracking-wider hidden sm:inline">CARRITO</span>
+                    <span id="cartCountBadge" class="bg-gold-400 text-neutral-900 text-xs font-extrabold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-stone-900 text-white px-6 py-6 border-t border-stone-800 space-y-4">
+            <div class="relative mb-4">
+                <input type="text" id="searchInputMobile" placeholder="Buscar prendas..." class="w-full bg-stone-800 text-white text-sm rounded-lg pl-9 pr-4 py-2.5 border border-stone-700 focus:outline-none">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-stone-400 text-xs"></i>
+            </div>
+            <a href="#inicio" class="block py-2 text-stone-200 hover:text-gold-400 font-medium">Inicio</a>
+            <a href="#catalogo" class="block py-2 text-stone-200 hover:text-gold-400 font-medium">Colección de Ropa</a>
+            <a href="#reto-digital" class="block py-2 text-gold-400 font-semibold flex items-center gap-2"><i class="fa-solid fa-rocket"></i> Nuestro Reto Digital</a>
+            <a href="#nosotros" class="block py-2 text-stone-200 hover:text-gold-400 font-medium">Sobre Nosotros</a>
+            <a href="#contacto" class="block py-2 text-stone-200 hover:text-gold-400 font-medium">Contacto</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="relative bg-neutral-900 text-white overflow-hidden min-h-[85vh] flex items-center">
+        <!-- Background Overlay Image -->
+        <div class="absolute inset-0 z-0 opacity-40 mix-blend-luminosity">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600&auto=format&fit=crop" 
+                 alt="Moda Elegante Banner" 
+                 class="w-full h-full object-cover object-center">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-900/80 to-transparent z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 py-20 lg:py-32">
+            <div class="max-w-2xl space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-stone-800/80 border border-gold-400/30 text-gold-400 text-xs font-semibold tracking-wider uppercase backdrop-blur-sm">
+                    <i class="fa-solid fa-sparkles"></i> Colección Otoño - Invierno 2026
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-none text-white">
+                    Elegancia Clásica,<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-gold-400 to-amber-500">Experiencia Digital</span>
+                </h1>
+                <p class="text-stone-300 text-base sm:text-lg leading-relaxed font-light">
+                    Transformamos nuestra boutique tradicional en una plataforma boutique online interactiva. Descubre la confección premium, cortes atemporales y un servicio al cliente personalizado desde la comodidad de tu hogar.
+                </p>
+                <div class="pt-4 flex flex-wrap gap-4 items-center">
+                    <a href="#catalogo" class="bg-gold-400 text-neutral-950 font-bold px-8 py-4 rounded-full hover:bg-white hover:scale-105 transition-all shadow-lg flex items-center gap-3">
+                        EXPLORAR CATÁLOGO <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    <a href="#reto-digital" class="bg-white/10 hover:bg-white/20 text-white font-medium px-6 py-4 rounded-full border border-white/20 backdrop-blur-md transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info text-amber-400"></i> Conoce Nuestro Reto
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METRICS / DIGITALIZATION HIGHLIGHT STRIP -->
+    <section class="bg-stone-900 border-y border-stone-800 text-stone-300 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="p-4 border-r border-stone-800 last:border-0">
+                <p class="text-3xl font-extrabold text-gold-400">24 / 7</p>
+                <p class="text-xs uppercase tracking-wider text-stone-400 mt-1">Disponibilidad Online</p>
+            </div>
+            <div class="p-4 border-r border-stone-800 last:border-0">
+                <p class="text-3xl font-extrabold text-white">+500</p>
+                <p class="text-xs uppercase tracking-wider text-stone-400 mt-1">Productos Digitalizados</p>
+            </div>
+            <div class="p-4 border-r border-stone-800 last:border-0">
+                <p class="text-3xl font-extrabold text-gold-400">100%</p>
+                <p class="text-xs uppercase tracking-wider text-stone-400 mt-1">Stock Sincronizado</p>
+            </div>
+            <div class="p-4">
+                <p class="text-3xl font-extrabold text-white">24h</p>
+                <p class="text-xs uppercase tracking-wider text-stone-400 mt-1">Envío Express Garantizado</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATALOG / E-COMMERCE INTERACTIVE SECTION -->
+    <section id="catalogo" class="py-20 bg-stone-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Title -->
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <span class="text-amber-600 font-bold uppercase text-xs tracking-widest">Catálogo Exclusivo</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-900">Nuestra Colección de Moda</h2>
+                <p class="text-stone-600 text-sm sm:text-base">
+                    Navega por nuestras prendas seleccionadas. Utiliza los filtros para encontrar tu estilo ideal, elige tu talla y añade tus prendas favoritas al carrito interactivo.
+                </p>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10">
+                <button class="filter-btn active bg-neutral-900 text-white font-medium text-xs sm:text-sm px-5 py-2.5 rounded-full shadow transition-all" data-category="todos">
+                    Todos los productos
+                </button>
+                <button class="filter-btn bg-white hover:bg-stone-200 text-stone-700 font-medium text-xs sm:text-sm px-5 py-2.5 rounded-full border border-stone-300 transition-all" data-category="camisetas">
+                    Camisetas y Tops
+                </button>
+                <button class="filter-btn bg-white hover:bg-stone-200 text-stone-700 font-medium text-xs sm:text-sm px-5 py-2.5 rounded-full border border-stone-300 transition-all" data-category="pantalones">
+                    Pantalones y Jeans
+                </button>
+                <button class="filter-btn bg-white hover:bg-stone-200 text-stone-700 font-medium text-xs sm:text-sm px-5 py-2.5 rounded-full border border-stone-300 transition-all" data-category="chaquetas">
+                    Chaquetas y Abrigos
+                </button>
+                <button class="filter-btn bg-white hover:bg-stone-200 text-stone-700 font-medium text-xs sm:text-sm px-5 py-2.5 rounded-full border border-stone-300 transition-all" data-category="accesorios">
+                    Accesorios Exclusivos
+                </button>
+                <button class="filter-btn bg-amber-500 hover:bg-amber-600 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-sm transition-all" data-category="ofertas">
+                    <i class="fa-solid fa-tag text-xs mr-1"></i> Ofertas
+                </button>
+            </div>
+
+            <!-- Product Cards Grid -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Products will be injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- RETO DE DIGITALIZACIÓN / TRANSFOMACIÓN DIGITAL SECTION -->
+    <section id="reto-digital" class="py-20 bg-neutral-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Text Column -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-gold-400/20 text-gold-400 text-xs font-bold uppercase tracking-widest border border-gold-400/30">
+                        <i class="fa-solid fa-graduation-cap"></i> Caso Práctico / Reto Resuelto
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                        Transformación Digital de un Negocio Tradicional
+                    </h2>
+                    <p class="text-stone-300 text-sm sm:text-base leading-relaxed">
+                        En respuesta al reto profesional de digitalización de empresas tradicionales, **Moda & Estilo** ha evolucionado de una tienda de ropa física convencional a un modelo de negocio omnicanal altamente eficiente y automatizado.
+                    </p>
+
+                    <!-- Digital Pillars Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="bg-stone-800/70 p-4 rounded-xl border border-stone-700">
+                            <div class="w-10 h-10 rounded-lg bg-gold-400/10 text-gold-400 flex items-center justify-center font-bold mb-3">
+                                <i class="fa-solid fa-boxes-stacked"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Gestión de Inventario Online</h4>
+                            <p class="text-stone-400 text-xs mt-1">Sincronización en tiempo real del stock del almacén físico y la plataforma e-commerce.</p>
+                        </div>
+                        <div class="bg-stone-800/70 p-4 rounded-xl border border-stone-700">
+                            <div class="w-10 h-10 rounded-lg bg-gold-400/10 text-gold-400 flex items-center justify-center font-bold mb-3">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Venta 24/7 y Alcance Global</h4>
+                            <p class="text-stone-400 text-xs mt-1">Expansión de la presencia comercial sin barreras geográficas ni horarias.</p>
+                        </div>
+                        <div class="bg-stone-800/70 p-4 rounded-xl border border-stone-700">
+                            <div class="w-10 h-10 rounded-lg bg-gold-400/10 text-gold-400 flex items-center justify-center font-bold mb-3">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Análisis de Datos y Demanda</h4>
+                            <p class="text-stone-400 text-xs mt-1">Uso de analítica web para optimizar ofertas, conocer preferencias y reducir sobrecostes.</p>
+                        </div>
+                        <div class="bg-stone-800/70 p-4 rounded-xl border border-stone-700">
+                            <div class="w-10 h-10 rounded-lg bg-gold-400/10 text-gold-400 flex items-center justify-center font-bold mb-3">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Atención al Cliente Digital</h4>
+                            <p class="text-stone-400 text-xs mt-1">Asesoramiento personalizado en línea mediante canales ágiles de comunicación.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Visual Box -->
+                <div class="lg:col-span-5 bg-stone-800 p-8 rounded-3xl border border-stone-700 shadow-2xl space-y-6 relative">
+                    <div class="absolute -top-3 -right-3 bg-gold-400 text-neutral-900 text-xs font-black uppercase px-3 py-1 rounded-full shadow-md">
+                        Objetivos Cumplidos
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white border-b border-stone-700 pb-4">
+                        Herramientas Clave del Ecosistema
+                    </h3>
+
+                    <ul class="space-y-4 text-xs sm:text-sm text-stone-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-gold-400 mt-1"></i>
+                            <div>
+                                <strong class="text-white block">E-Commerce & Catálogo Virtual:</strong>
+                                Plataforma adaptativa para la visualización fluida de prendas.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-gold-400 mt-1"></i>
+                            <div>
+                                <strong class="text-white block">Pasarela de Pago Segura:</strong>
+                                Integración de transacciones cifradas y múltiples opciones de pago.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-gold-400 mt-1"></i>
+                            <div>
+                                <strong class="text-white block">Gestión Logística Integrada:</strong>
+                                Automatización de etiquetas de envío y seguimiento de pedidos.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-gold-400 mt-1"></i>
+                            <div>
+                                <strong class="text-white block">Presencia en Redes Sociales & Marketing:</strong>
+                                Estrategia digital activa para atraer clientes al e-commerce.
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="p-4 bg-stone-900 rounded-xl border border-stone-700/80 text-center">
+                        <p class="text-xs text-stone-400 italic">"La transformación digital no elimina la esencia de la tienda de ropa tradicional, la potencia hacia el futuro."</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- DIGITAL BENEFITS & SERVICES -->
+    <section class="py-16 bg-white border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <div class="flex items-center gap-4 p-4 rounded-2xl bg-stone-50 border border-stone-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-truck-ramp-box"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-stone-900 text-sm">Envío Rápido a Domicilio</h4>
+                        <p class="text-stone-500 text-xs mt-0.5">Entregas exprés en 24/48 horas</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 rounded-2xl bg-stone-50 border border-stone-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-stone-900 text-sm">Pago 100% Seguro</h4>
+                        <p class="text-stone-500 text-xs mt-0.5">Cifrado de datos de alta seguridad</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 rounded-2xl bg-stone-50 border border-stone-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-arrow-rotate-left"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-stone-900 text-sm">Devoluciones Sencillas</h4>
+                        <p class="text-stone-500 text-xs mt-0.5">30 días de garantía sin compromiso</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 rounded-2xl bg-stone-50 border border-stone-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-user-gear"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-stone-900 text-sm">Asesoría de Imagen Digital</h4>
+                        <p class="text-stone-500 text-xs mt-0.5">Atención personalizada vía chat</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section id="nosotros" class="py-20 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" 
+                         alt="Nuestra Tienda Física y Digital" 
+                         class="rounded-3xl shadow-2xl object-cover w-full h-[450px]">
+                    <div class="absolute -bottom-6 -right-6 bg-gold-400 text-neutral-900 p-6 rounded-2xl shadow-xl hidden sm:block max-w-xs">
+                        <p class="font-black text-2xl">Desde 1998</p>
+                        <p class="text-xs font-medium mt-1">Uniendo la tradición textil artesanal con la vanguardia del comercio digital.</p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <span class="text-amber-600 font-bold uppercase text-xs tracking-widest">Nuestra Historia</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-900">Pasión por la Moda, Compromiso con la Calidad</h2>
+                    <p class="text-stone-600 text-sm sm:text-base leading-relaxed">
+                        Nacimos como una pequeña boutique familiar dedicada a la selección cuidadosa de las mejores telas y prendas. Con el proceso de digitalización, hemos dado el salto para llevar nuestras colecciones únicas a cualquier rincón, manteniendo la cercanía y la atención detallada que siempre nos ha caracterizado.
+                    </p>
+                    <p class="text-stone-600 text-sm sm:text-base leading-relaxed">
+                        Cada diseño en nuestro catálogo digital representa un compromiso con el estilo atemporal, la durabilidad de los materiales y la satisfacción de nuestros clientes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & NEWSLETTER -->
+    <section id="contacto" class="py-16 bg-neutral-900 text-white border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-stone-800 to-neutral-800 p-8 sm:p-12 rounded-3xl border border-stone-700 shadow-xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Únete al Club Moda & Estilo</h3>
+                    <p class="text-stone-300 text-sm mt-2">
+                        Suscríbete para recibir un **15% de descuento** en tu primera compra online, avances exclusivos de nuevas colecciones y novedades sobre nuestro proyecto digital.
+                    </p>
+                </div>
+                <div>
+                    <form id="newsletterForm" class="flex flex-col sm:flex-row gap-3">
+                        <input type="email" placeholder="Introduce tu correo electrónico..." required 
+                            class="bg-stone-900 text-white placeholder-stone-400 px-5 py-3.5 rounded-full border border-stone-700 focus:outline-none focus:border-gold-400 flex-grow text-sm">
+                        <button type="submit" class="bg-gold-400 text-neutral-900 font-bold px-7 py-3.5 rounded-full hover:bg-white transition-all text-sm shrink-0 shadow-md">
+                            SUSCRIBIRSE
+                        </button>
+                    </form>
+                    <p id="newsletterMsg" class="text-xs text-gold-400 mt-2 hidden">¡Gracias por suscribirte! Te hemos enviado un cupón de bienvenida.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-stone-950 text-stone-400 py-12 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            
+            <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-gold-400 text-black flex items-center justify-center font-bold text-sm">M&E</div>
+                    <span class="text-lg font-bold text-white tracking-wider">MODA & ESTILO</span>
+                </div>
+                <p class="text-xs text-stone-400 leading-relaxed">
+                    E-Commerce de moda masculina y femenina. Proyecto ejemplo de transformación y digitalización comercial exitosa.
+                </p>
+                <div class="flex space-x-4 text-stone-300">
+                    <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
+                    <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-facebook text-lg"></i></a>
+                    <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-tiktok text-lg"></i></a>
+                    <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-pinterest text-lg"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-wider">Navegación</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#inicio" class="hover:text-gold-400 transition-colors">Inicio</a></li>
+                    <li><a href="#catalogo" class="hover:text-gold-400 transition-colors">Colección de Ropa</a></li>
+                    <li><a href="#reto-digital" class="hover:text-gold-400 transition-colors">Reto Digital de Negocio</a></li>
+                    <li><a href="#nosotros" class="hover:text-gold-400 transition-colors">Sobre Nosotros</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-wider">Categorías Top</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#catalogo" class="hover:text-gold-400 transition-colors">Camisetas Premium</a></li>
+                    <li><a href="#catalogo" class="hover:text-gold-400 transition-colors">Pantalones y Denim</a></li>
+                    <li><a href="#catalogo" class="hover:text-gold-400 transition-colors">Chaquetas Elegantes</a></li>
+                    <li><a href="#catalogo" class="hover:text-gold-400 transition-colors">Accesorios de Piel</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-wider">Contacto & Soporte</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><i class="fa-solid fa-location-dot text-gold-400 mr-2"></i> Calle Gran Vía 45, Madrid, España</li>
+                    <li><i class="fa-solid fa-envelope text-gold-400 mr-2"></i> contacto@modayestilo.com</li>
+                    <li><i class="fa-solid fa-phone text-gold-400 mr-2"></i> +34 912 345 678</li>
+                    <li><i class="fa-solid fa-clock text-gold-400 mr-2"></i> Atención Web: 24/7</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-stone-800 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-500 gap-4">
+            <p>&copy; 2026 Moda & Estilo Atelier. Todos los derechos reservados. Proyecto de Digitalización Comercial.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:underline">Aviso Legal</a>
+                <a href="#" class="hover:underline">Política de Privacidad</a>
+                <a href="#" class="hover:underline">Política de Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SLIDE-OVER SHOPPING CART PANEL -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
+        <!-- Backdrop -->
+        <div id="cartBackdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div id="cartPanel" class="w-screen max-w-md bg-white shadow-2xl flex flex-col pointer-events-auto transform translate-x-full transition-transform duration-300 ease-in-out">
+                
+                <!-- Drawer Header -->
+                <div class="p-6 bg-stone-900 text-white flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-bag-shopping text-gold-400 text-xl"></i>
+                        <h3 class="text-lg font-extrabold tracking-wide">CARRITO DE COMPRA</h3>
+                    </div>
+                    <button id="closeCartBtn" class="text-stone-400 hover:text-white text-xl p-1 focus:outline-none">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Drawer Content / Items List -->
+                <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-4 divide-y divide-stone-100">
+                    <!-- Dynamic cart items will be rendered here -->
+                </div>
+
+                <!-- Drawer Footer & Checkout -->
+                <div class="p-6 bg-stone-50 border-t border-stone-200 space-y-4">
+                    <div class="space-y-2 text-sm text-stone-600">
+                        <div class="flex justify-between">
+                            <span>Subtotal</span>
+                            <span id="cartSubtotal" class="font-bold text-stone-900">0.00 €</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Gastos de envío</span>
+                            <span id="cartShipping" class="font-bold text-stone-900">Gratis</span>
+                        </div>
+                        <div class="flex justify-between text-base font-extrabold text-stone-900 pt-2 border-t border-stone-200">
+                            <span>Total (IVA incl.)</span>
+                            <span id="cartTotal" class="text-xl text-amber-700">0.00 €</span>
+                        </div>
+                    </div>
+
+                    <button id="checkoutBtn" class="w-full bg-neutral-900 text-white hover:bg-gold-400 hover:text-black font-bold py-3.5 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+                        <span>PROCESAR PEDIDO</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                    <p class="text-[11px] text-center text-stone-400 flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-lock text-stone-400"></i> Transacción digital 100% segura y cifrada
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT QUICK VIEW / DETAILS MODAL -->
+    <div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative border border-stone-200 animate-fade-in">
+            <button id="closeModalBtn" class="absolute top-4 right-4 z-10 bg-white/80 hover:bg-white text-stone-800 rounded-full w-9 h-9 flex items-center justify-center shadow transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="modalContent" class="grid grid-cols-1 md:grid-cols-2">
+                <!-- Modal content populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT SUCCESS MODAL -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 text-center space-y-6 shadow-2xl border border-stone-200">
+            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-2xl font-extrabold text-stone-900">¡Pedido Realizado con Éxito!</h3>
+                <p class="text-stone-600 text-sm">
+                    Tu compra simulada ha sido procesada correctamente dentro de la demostración del reto de digitalización.
+                </p>
+            </div>
+            <div class="bg-stone-50 p-4 rounded-xl text-left text-xs text-stone-600 space-y-1">
+                <p><strong>Nº de Pedido:</strong> #ME-2026-<span id="orderNum">8942</span></p>
+                <p><strong>Estado:</strong> En preparación en almacén digital</p>
+                <p><strong>Entrega estimada:</strong> 24-48 horas</p>
+            </div>
+            <button id="closeCheckoutSuccessBtn" class="w-full bg-neutral-900 text-white font-bold py-3.5 rounded-xl hover:bg-amber-600 transition-colors">
+                VOLVER A LA TIENDA
+            </button>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-neutral-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-gold-400/40 transition-all duration-300 translate-y-20 opacity-0 pointer-events-none">
+        <div class="w-8 h-8 rounded-full bg-gold-400 text-black flex items-center justify-center text-sm font-bold">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div>
+            <p id="toastMessage" class="text-xs font-bold">Producto añadido al carrito</p>
+            <p class="text-[10px] text-stone-400">Actualizado en el sistema online</p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // DATA SET FOR THE CLOTHING STORE PRODUCTS
+        const productsData = [
+            {
+                id: 1,
+                name: "Camisa Oxford Algodón Orgánico",
+                category: "camisetas",
+                price: 49.99,
+                originalPrice: 65.00,
+                rating: 5,
+                sizes: ["S", "M", "L", "XL"],
+                image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=800&auto=format&fit=crop",
+                badge: "Top Ventas",
+                description: "Camisa de vestir de corte entallado confeccionada en 100% algodón orgánico transpirable. Ideal para atuendos formales y casuales."
+            },
+            {
+                id: 2,
+                name: "Chaqueta Blazer Bross Tweed",
+                category: "chaquetas",
+                price: 129.95,
+                originalPrice: 159.00,
+                rating: 5,
+                sizes: ["M", "L", "XL"],
+                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop",
+                badge: "Premium",
+                description: "Americana de lana estructurada con solapa de muesca y forro satinado interior. Elegancia atemporal para cualquier ocasión."
+            },
+            {
+                id: 3,
+                name: "Pantalón Chino Slim Fit Canvas",
+                category: "pantalones",
+                price: 59.90,
+                originalPrice: 59.90,
+                rating: 4,
+                sizes: ["S", "M", "L", "XL"],
+                image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=800&auto=format&fit=crop",
+                badge: null,
+                description: "Pantalón chino moderno de elástano y algodón con acabado suave. Diseñado para ofrecer máxima libertad de movimiento."
+            },
+            {
+                id: 4,
+                name: "Abrigo Largo Lana Merino",
+                category: "chaquetas",
+                price: 189.00,
+                originalPrice: 220.00,
+                rating: 5,
+                sizes: ["S", "M", "L"],
+                image: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=800&auto=format&fit=crop",
+                badge: "Oferta",
+                description: "Abrigo clásico de paño en mezcla de lana merino suave. Cierre de tres botones y bolsillos laterales de solapa."
+            },
+            {
+                id: 5,
+                name: "Camiseta Basic Essential Heavyweight",
+                category: "camisetas",
+                price: 24.99,
+                originalPrice: 29.99,
+                rating: 4,
+                sizes: ["S", "M", "L", "XL"],
+                image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+                badge: "Esencial",
+                description: "Camiseta de cuello redondo de gramaje superior de 220g. Un básico imperecedero con durabilidad extrema."
+            },
+            {
+                id: 6,
+                name: "Cinturón de Piel Artesanal",
+                category: "accesorios",
+                price: 34.50,
+                originalPrice: 34.50,
+                rating: 5,
+                sizes: ["Unica"],
+                image: "https://images.unsplash.com/photo-1624222247344-550fb60583dc?q=80&w=800&auto=format&fit=crop",
+                badge: null,
+                description: "Cinturón confeccionado a mano en piel vacuno curtida con hebilla metálica satinada antialérgica."
+            },
+            {
+                id: 7,
+                name: "Jeans Denim Regular Vintage Wash",
+                category: "pantalones",
+                price: 69.95,
+                originalPrice: 89.95,
+                rating: 4,
+                sizes: ["S", "M", "L", "XL"],
+                image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop",
+                badge: "Oferta",
+                description: "Vaquero de tinte desgastado efecto vintage. Confeccionado con técnicas sostenibles de ahorro de agua."
+            },
+            {
+                id: 8,
+                name: "Reloj Minimalista Cronógrafo Piel",
+                category: "accesorios",
+                price: 119.00,
+                originalPrice: 149.00,
+                rating: 5,
+                sizes: ["Unica"],
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop",
+                badge: "Edición Limitada",
+                description: "Reloj elegante con caja de acero inoxidable en acabado mate y correa de cuero genuino intercambiable."
+            }
+        ];
+
+        // STATE MANAGEMENT
+        let cart = [];
+        let selectedCategory = 'todos';
+        let searchQuery = '';
+
+        // DOM ELEMENTS
+        const productGrid = document.getElementById('productGrid');
+        const cartDrawer = document.getElementById('cartDrawer');
+        const cartPanel = document.getElementById('cartPanel');
+        const cartBackdrop = document.getElementById('cartBackdrop');
+        const openCartBtn = document.getElementById('openCartBtn');
+        const closeCartBtn = document.getElementById('closeCartBtn');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartCountBadge = document.getElementById('cartCountBadge');
+        const cartSubtotal = document.getElementById('cartSubtotal');
+        const cartTotal = document.getElementById('cartTotal');
+        const searchInput = document.getElementById('searchInput');
+        const searchInputMobile = document.getElementById('searchInputMobile');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const checkoutModal = document.getElementById('checkoutModal');
+        const closeCheckoutSuccessBtn = document.getElementById('closeCheckoutSuccessBtn');
+        const productModal = document.getElementById('productModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalContent = document.getElementById('modalContent');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        // INITIALIZE APP
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCartUI();
+
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Filter Category Buttons Event Listeners
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('active', 'bg-neutral-900', 'text-white');
+                        b.classList.add('bg-white', 'text-stone-700');
+                    });
+                    
+                    const clickedBtn = e.currentTarget;
+                    clickedBtn.classList.add('active', 'bg-neutral-900', 'text-white');
+                    clickedBtn.classList.remove('bg-white', 'text-stone-700');
+
+                    selectedCategory = clickedBtn.dataset.category;
+                    renderProducts();
+                });
+            });
+
+            // Search Filter Events
+            if (searchInput) searchInput.addEventListener('input', (e) => { searchQuery = e.target.value.toLowerCase(); renderProducts(); });
+            if (searchInputMobile) searchInputMobile.addEventListener('input', (e) => { searchQuery = e.target.value.toLowerCase(); renderProducts(); });
+
+            // Cart Drawer Events
+            openCartBtn.addEventListener('click', openCart);
+            closeCartBtn.addEventListener('click', closeCart);
+            cartBackdrop.addEventListener('click', closeCart);
+
+            // Checkout Event
+            checkoutBtn.addEventListener('click', processCheckout);
+            closeCheckoutSuccessBtn.addEventListener('click', () => {
+                checkoutModal.classList.add('hidden');
+            });
+
+            // Product Modal Close
+            closeModalBtn.addEventListener('click', () => {
+                productModal.classList.add('hidden');
+            });
+
+            // Newsletter Form
+            document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                document.getElementById('newsletterMsg').classList.remove('hidden');
+                e.target.reset();
+            });
+        });
+
+        // RENDER PRODUCTS GRID
+        function renderProducts() {
+            productGrid.innerHTML = '';
+
+            const filteredProducts = productsData.filter(product => {
+                const matchesCategory = (selectedCategory === 'todos') ? true :
+                                        (selectedCategory === 'ofertas') ? (product.badge === 'Oferta' || product.originalPrice > product.price) :
+                                        product.category === selectedCategory;
+
+                const matchesSearch = product.name.toLowerCase().includes(searchQuery) || 
+                                      product.description.toLowerCase().includes(searchQuery);
+
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filteredProducts.length === 0) {
+                productGrid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-stone-500">
+                        <i class="fa-solid fa-magnifying-glass text-4xl mb-3 text-stone-300"></i>
+                        <p class="font-bold text-lg">No se encontraron prendas con estos criterios.</p>
+                        <p class="text-sm">Prueba seleccionando otra categoría o búsqueda.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredProducts.forEach(product => {
+                const starsHtml = Array(product.rating).fill('<i class="fa-solid fa-star text-gold-400 text-xs"></i>').join('');
+                const hasDiscount = product.originalPrice > product.price;
+
+                const cardHtml = `
+                    <div class="product-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/80 flex flex-col group">
+                        
+                        <!-- Image & Badge Container -->
+                        <div class="relative overflow-hidden bg-stone-100 aspect-[4/5]">
+                            <img src="${product.image}" alt="${product.name}" class="product-img w-full h-full object-cover transition-transform duration-500">
+                            
+                            ${product.badge ? `<span class="absolute top-3 left-3 bg-neutral-900 text-gold-400 text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full tracking-wider shadow">${product.badge}</span>` : ''}
+
+                            <button onclick="quickView(${product.id})" class="absolute top-3 right-3 bg-white/90 hover:bg-white text-stone-800 rounded-full w-8 h-8 flex items-center justify-center shadow opacity-0 group-hover:opacity-100 transition-opacity" title="Vista rápida">
+                                <i class="fa-solid fa-eye text-xs"></i>
+                            </button>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <div class="flex items-center gap-1 mb-1">
+                                    ${starsHtml}
+                                </div>
+                                <h3 class="font-bold text-stone-900 text-base group-hover:text-amber-600 transition-colors line-clamp-1">${product.name}</h3>
+                                <p class="text-stone-500 text-xs mt-1 line-clamp-2">${product.description}</p>
+                            </div>
+
+                            <div class="space-y-3 pt-2 border-t border-stone-100">
+                                <!-- Price & Size selector -->
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-lg font-extrabold text-stone-900">${product.price.toFixed(2)} €</span>
+                                        ${hasDiscount ? `<span class="text-xs text-stone-400 line-through ml-1.5">${product.originalPrice.toFixed(2)} €</span>` : ''}
+                                    </div>
+
+                                    <!-- Size Picker Dropdown -->
+                                    <select id="size-${product.id}" class="bg-stone-100 text-stone-800 text-xs font-semibold rounded-lg px-2 py-1 border border-stone-200 focus:outline-none">
+                                        ${product.sizes.map(size => `<option value="${size}">Talla: ${size}</option>`).join('')}
+                                    </select>
+                                </div>
+
+                                <!-- Add To Cart Button -->
+                                <button onclick="addToCart(${product.id})" class="w-full bg-neutral-900 hover:bg-amber-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-colors shadow">
+                                    <i class="fa-solid fa-cart-plus"></i> Añadir al Carrito
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                `;
+                productGrid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        // ADD TO CART FUNCTION
+        function addToCart(productId) {
+            const product = productsData.find(p => p.id === productId);
+            if (!product) return;
+
+            const sizeSelect = document.getElementById(`size-${productId}`);
+            const selectedSize = sizeSelect ? sizeSelect.value : product.sizes[0];
+
+            const existingItemIndex = cart.findIndex(item => item.id === productId && item.size === selectedSize);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    size: selectedSize,
+                    quantity: 1
+                });
+            }
+
+            updateCartUI();
+            showToast(`Añadido: ${product.name} (${selectedSize})`);
+        }
+
+        // UPDATE CART UI & CALCULATIONS
+        function updateCartUI() {
+            // Calculate total items count
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountBadge.textContent = totalCount;
+
+            // Render Cart Items
+            cartItemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center text-stone-400 py-12">
+                        <i class="fa-solid fa-basket-shopping text-5xl mb-4 text-stone-200"></i>
+                        <p class="font-bold text-stone-700">Tu carrito está vacío</p>
+                        <p class="text-xs text-stone-400 mt-1">Explora nuestro catálogo e introduce prendas.</p>
+                    </div>
+                `;
+                cartSubtotal.textContent = '0.00 €';
+                cartTotal.textContent = '0.00 €';
+                return;
+            }
+
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                const itemHtml = `
+                    <div class="pt-4 flex gap-4 items-center">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-20 object-cover rounded-xl bg-stone-100 shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-stone-900 text-xs truncate">${item.name}</h4>
+                            <p class="text-[11px] text-stone-500 mt-0.5">Talla: <span class="font-semibold text-stone-800">${item.size}</span></p>
+                            <p class="font-extrabold text-stone-900 text-xs mt-1">${item.price.toFixed(2)} €</p>
+                            
+                            <!-- Quantity Controls -->
+                            <div class="flex items-center gap-2 mt-2">
+                                <button onclick="changeQuantity(${index}, -1)" class="w-6 h-6 rounded-md bg-stone-100 hover:bg-stone-200 text-stone-700 flex items-center justify-center text-xs font-bold">-</button>
+                                <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
+                                <button onclick="changeQuantity(${index}, 1)" class="w-6 h-6 rounded-md bg-stone-100 hover:bg-stone-200 text-stone-700 flex items-center justify-center text-xs font-bold">+</button>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <button onclick="removeFromCart(${index})" class="text-stone-400 hover:text-red-500 text-xs p-1" title="Eliminar">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                            <p class="text-xs font-extrabold text-stone-900 mt-4">${itemTotal.toFixed(2)} €</p>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.insertAdjacentHTML('beforeend', itemHtml);
+            });
+
+            cartSubtotal.textContent = `${subtotal.toFixed(2)} €`;
+            cartTotal.textContent = `${subtotal.toFixed(2)} €`;
+        }
+
+        // CHANGE ITEM QUANTITY IN CART
+        function changeQuantity(index, delta) {
+            if (cart[index]) {
+                cart[index].quantity += delta;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+                updateCartUI();
+            }
+        }
+
+        // REMOVE ITEM FROM CART
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // CART DRAWER TOGGLE
+        function openCart() {
+            cartDrawer.classList.remove('pointer-events-none', 'opacity-0');
+            cartDrawer.classList.add('opacity-100');
+            cartPanel.classList.remove('translate-x-full');
+        }
+
+        function closeCart() {
+            cartPanel.classList.add('translate-x-full');
+            cartDrawer.classList.add('opacity-0');
+            setTimeout(() => {
+                cartDrawer.classList.add('pointer-events-none');
+            }, 300);
+        }
+
+        // SHOW TOAST NOTIFICATION
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('toast-show');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+                toast.classList.remove('toast-show');
+            }, 3000);
+        }
+
+        // QUICK VIEW MODAL
+        function quickView(productId) {
+            const product = productsData.find(p => p.id === productId);
+            if (!product) return;
+
+            modalContent.innerHTML = `
+                <div class="bg-stone-100 aspect-square">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6 sm:p-8 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <span class="text-amber-600 text-xs font-bold uppercase tracking-wider">${product.category}</span>
+                        <h3 class="text-xl font-extrabold text-stone-900">${product.name}</h3>
+                        <p class="text-stone-600 text-xs leading-relaxed">${product.description}</p>
+                        <p class="text-2xl font-extrabold text-stone-900 pt-2">${product.price.toFixed(2)} €</p>
+                    </div>
+
+                    <div class="space-y-3 pt-4 border-t border-stone-200">
+                        <label class="block text-xs font-bold text-stone-700">Seleccionar Talla:</label>
+                        <div class="flex gap-2">
+                            ${product.sizes.map((s, idx) => `
+                                <button class="w-9 h-9 rounded-lg border border-stone-300 text-xs font-bold text-stone-800 hover:border-amber-600 focus:bg-neutral-900 focus:text-white transition-all">
+                                    ${s}
+                                </button>
+                            `).join('')}
+                        </div>
+                        <button onclick="addToCart(${product.id}); closeModal();" class="w-full bg-neutral-900 hover:bg-amber-600 text-white font-bold py-3 rounded-xl text-xs transition-colors shadow-md mt-4">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            productModal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            productModal.classList.add('hidden');
+        }
+
+        // SIMULATED CHECKOUT
+        function processCheckout() {
+            if (cart.length === 0) {
+                showToast("El carrito está vacío.");
+                return;
+            }
+
+            // Set random order number
+            document.getElementById('orderNum').textContent = Math.floor(1000 + Math.random() * 9000);
+
+            // Clear Cart and close drawer
+            cart = [];
+            updateCartUI();
+            closeCart();
+
+            // Open Checkout Modal
+            checkoutModal.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
